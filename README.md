@@ -1,1 +1,1 @@
-$ Simple online store app created with Django
+# Simple online store app created with Django
