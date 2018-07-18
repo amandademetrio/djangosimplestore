@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Amadon</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css" integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B" crossorigin="anonymous">
+    <style>
+    h1 {
+        margin-top: 2%
+    }
+    #quantity {
+        margin-right: 30px
+    }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Amadon Store!</h1>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">Item</th>
+                    <th scope="col">Price</th>
+                    <th scope="col">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for product in products %}
+                <tr>
+                    <th>{{product.name}}</th>
+                    <td>${{product.price}}</td>
+                    <td>
+                        <form class="form-inline" action="/checkoutprocess" method="post">
+                        {% csrf_token %}
+                            <div class="form-group">
+                                <select class="form-control form-control-sm" name="product_quantity" id="quantity">
+                                    <option>1</option>
+                                    <option>2</option>
+                                    <option>3</option>
+                                    <option>4</option>
+                                    <option>5</option>
+                                </select>
+                            </div>
+                            <input type="hidden" name="product_id" value="{{product.id}}">
+                            <input type="submit" class="btn btn-success btn-sm" value="Buy!">
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <a href="/addproduct" type="button" class="btn btn-info btn-sm">Add Products</a>
+    </div>
+</body>
+</html>
